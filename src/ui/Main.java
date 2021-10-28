@@ -1,10 +1,13 @@
 package ui;
 
+import domain.Manager;
+
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-       UserInterface.start();
+       Manager manager=new Manager();
+       manager.start();
     }
 }

@@ -5,8 +5,9 @@ import ui.validation.EmailValidator;
 import ui.validation.NumValidator;
 import ui.validation.TelephoneNumberValidator;
 
-import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CreateMenu {
@@ -86,9 +87,9 @@ public class CreateMenu {
         }
     }
 
-    public static LinkedList<TelephoneNumber> getTelephoneNumbers() {
-        LinkedList<TelephoneNumber> telephoneNumbers = new LinkedList<TelephoneNumber>();
-        telephoneNumbers.add(getTelephoneNumber());
+    public static ArrayList<TelephoneNumber> getTelephoneNumbers() {
+        ArrayList<TelephoneNumber> telephoneNumbers = new ArrayList<TelephoneNumber>();
+        telephoneNumbers.add(getTelephoneNumber());//123
         if (isOneMoreNumber()) {
             telephoneNumbers.add(getTelephoneNumber());
             if (isOneMoreNumber()) {
