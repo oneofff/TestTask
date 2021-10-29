@@ -2,32 +2,32 @@ package domain;
 
 import domain.roles.RoleFirstlevel;
 import domain.roles.RoleSecondLevel;
-import domain.roles.RoleThirdLevel;
+import domain.roles.RoleSuper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class User {
+
     private String name;
     private String surName;
     private String email;
     private RoleFirstlevel roleFirstlevel;
     private RoleSecondLevel roleSecondLevel;
-    private RoleThirdLevel roleThirdLevel;
-    private ArrayList<TelephoneNumber> telephoneNumbers;
+    private RoleSuper roleSuper;
+    private List<String> telephoneNumbers;
 
     public User() {
-        telephoneNumbers = new ArrayList<TelephoneNumber>();
+        telephoneNumbers= new ArrayList<>();
     }
 
-    public User(String name, String surName, String email, RoleFirstlevel roleFirstlevel, RoleSecondLevel roleSecondLevel, RoleThirdLevel roleThirdLevel, ArrayList<TelephoneNumber> telephoneNumbers) {
+    public User(String name, String surName, String email, RoleFirstlevel roleFirstlevel, RoleSecondLevel roleSecondLevel, RoleSuper roleSuper, ArrayList<String> telephoneNumbers) {
         this.name = name;
         this.surName = surName;
         this.email = email;
-        this.roleFirstlevel = roleFirstlevel;
+        this.roleFirstlevel= roleFirstlevel;
         this.roleSecondLevel = roleSecondLevel;
-        this.roleThirdLevel = roleThirdLevel;
+        this.roleSuper = roleSuper;
         this.telephoneNumbers = telephoneNumbers;
     }
 
@@ -43,6 +43,26 @@ public class User {
         return email;
     }
 
+    public void setRoleFirstlevel(int choice) {
+        if (choice == 1) {
+            User.this.roleFirstlevel = RoleFirstlevel.USER;
+        } else {
+            User.this.roleFirstlevel = RoleFirstlevel.CUSTOMER;
+        }
+    }
+
+    public void setRoleSecondLevel(int choice) {
+        if (choice == 1) {
+            User.this.roleSecondLevel = RoleSecondLevel.ADMIN;
+        } else {
+            User.this.roleSecondLevel = RoleSecondLevel.PROVIDER;
+        }
+    }
+
+    public void setRoleSuper() {
+        this.roleSuper = RoleSuper.SUPER_ADMIN;
+    }
+
     public RoleFirstlevel getRoleFirstlevel() {
         return roleFirstlevel;
     }
@@ -51,74 +71,34 @@ public class User {
         return roleSecondLevel;
     }
 
-    public RoleThirdLevel getRoleThirdLevel() {
-        return roleThirdLevel;
+    public RoleSuper getRoleThirdLevel() {
+        return roleSuper;
     }
 
-    public ArrayList<TelephoneNumber> getTelephoneNumbers() {
+    public List<String> getStrings() {
         return telephoneNumbers;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurName(String surName) {
-        this.surName = surName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setRoleFirstlevel(RoleFirstlevel roleFirstlevel) {
-        this.roleFirstlevel = roleFirstlevel;
-    }
-
-    public void setRoleSecondLevel(RoleSecondLevel roleSecondLevel) {
-        this.roleSecondLevel = roleSecondLevel;
-    }
-
-    public void setRoleThirdLevel(RoleThirdLevel roleThirdLevel) {
-        this.roleThirdLevel = roleThirdLevel;
-    }
-    public void setRoleFirstlevel(int choice) {
-        if (choice==1) {
-            this.roleFirstlevel = RoleFirstlevel.User;
-        }
-        else
-        {
-            this.roleFirstlevel = RoleFirstlevel.Customer;
-        }
     }
 
     @Override
     public String toString() {
-        return  "name= '" + name + '\'' +
+        return "name= '" + name + '\'' +
                 ", surName= '" + surName + '\'' +
                 ", email= '" + email + '\'' +
-                ", roleFirstlevel= " + roleFirstlevel +
-                ", roleSecondLevel= " + roleSecondLevel +
-                ", roleThirdLevel= " + roleThirdLevel +
-                ", telephoneNumbers= " + telephoneNumbers;
+                ", roleFirstlevel= '" + roleFirstlevel + '\'' +
+                ", roleSecondLevel= '" + roleSecondLevel + '\'' +
+                ", roleSuper= '" + roleSuper + '\'' +
+                ", telephoneNumbers= '" + tepeponeNumbersToString() + '\'';
     }
-
-    public void setRoleSecondLevel(int choice) {
-        if (choice==1) {
-            this.roleSecondLevel = RoleSecondLevel.ADMIN;
+    private String tepeponeNumbersToString()
+    {
+        StringBuilder buffer= new StringBuilder();
+        for (int i = 0; i < telephoneNumbers.size(); i++) {
+            buffer.append(telephoneNumbers.get(i));
+            if (i==telephoneNumbers.size()-1)
+            continue;
+            buffer.append(",");
         }
-        else
-        {
-            this.roleSecondLevel = RoleSecondLevel.PROVIDER;
-        }
-    }
-
-    public void setRoleThirdLevel() {
-        this.roleThirdLevel = RoleThirdLevel.SUPER_ADMIN;
-    }
-
-    public void setTelephoneNumbers(ArrayList<TelephoneNumber> telephoneNumbers) {
-        this.telephoneNumbers = telephoneNumbers;
+        return buffer.toString();
     }
 
     public static User.Builder newBuilder() {
@@ -144,28 +124,52 @@ public class User {
             return this;
         }
 
-        public User.Builder setRoleFirstlevel(RoleFirstlevel roleFirstlevel) {
-            User.this.roleFirstlevel = roleFirstlevel;
+        public User.Builder RoleFirstlevel(String roleFirstlevel) {
+            if (RoleFirstlevel.USER.name().equals(roleFirstlevel)) {
+                User.this.roleFirstlevel = RoleFirstlevel.USER;
+            }
+            else if(RoleFirstlevel.CUSTOMER.name().equals(roleFirstlevel))
+            {
+                User.this.roleFirstlevel = RoleFirstlevel.CUSTOMER;
+            }
+            else {
+                User.this.roleFirstlevel = RoleFirstlevel.NOT_SELECTED;
+            }
             return this;
         }
 
-        public User.Builder roleSecondLevel(RoleSecondLevel roleSecondLevel) {
-            User.this.roleSecondLevel = roleSecondLevel;
+        public User.Builder roleSecondLevel(String role) {
+            if (RoleSecondLevel.ADMIN.name().equals(role)) {
+                User.this.roleSecondLevel = RoleSecondLevel.ADMIN;
+            }
+            else if (RoleSecondLevel.PROVIDER.name().equals(role)) {
+                User.this.roleSecondLevel = RoleSecondLevel.PROVIDER;
+            } else {
+                User.this.roleSecondLevel = RoleSecondLevel.NOT_SELECTED;
+            }
             return this;
         }
 
-        public User.Builder roleThirdLevel(RoleThirdLevel roleThirdLevel) {
-            User.this.roleThirdLevel = roleThirdLevel;
+        public User.Builder RoleSuper(String role) {
+            if (RoleSuper.SUPER_ADMIN.name().equals(role)) {
+                User.this.roleSuper = RoleSuper.SUPER_ADMIN;
+            }
+            else {
+                User.this.roleSuper=RoleSuper.NOT_SELECTED;
+            }
+
             return this;
         }
 
-        public User.Builder telephoneNumbers(ArrayList<TelephoneNumber> telephoneNumbers) {
+        public User.Builder telephoneNumbers(List<String> telephoneNumbers) {
             User.this.telephoneNumbers = telephoneNumbers;
             return this;
         }
+
         public User build() {
             return User.this;
         }
 
     }
+
 }

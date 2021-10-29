@@ -1,0 +1,2 @@
+name= 'Stas', surName= 'Karol', email= 'sad@gmail.com', roleFirstlevel= 'CUSTOMER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375336348180,375336348188'
+name= 'Vika', surName= 'Karol', email= 'asdqw@gmai.cl', roleFirstlevel= 'NOT_SELECTED', roleSecondLevel= 'NOT_SELECTED', roleSuper= 'SUPER_ADMIN', telephoneNumbers= '375336348188,375336399999,375336348180'

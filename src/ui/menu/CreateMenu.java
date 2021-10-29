@@ -1,16 +1,19 @@
 package ui.menu;
 
-import domain.TelephoneNumber;
+import domain.roles.RoleFirstlevel;
+import domain.roles.RoleSecondLevel;
+import domain.roles.RoleSuper;
 import ui.validation.EmailValidator;
 import ui.validation.NumValidator;
 import ui.validation.TelephoneNumberValidator;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class CreateMenu {
+
     public static String getName() {
         System.out.println("Enter name:");
         Scanner in = new Scanner(System.in);
@@ -35,8 +38,7 @@ public class CreateMenu {
             }
         }
     }
-
-    public static int choiceSuperRole() {
+    public static String choiceSuperRole() {
         System.out.println("Choice super role:");
         System.out.println("1.Super Admin");
         System.out.println("2.No super role");
@@ -48,12 +50,13 @@ public class CreateMenu {
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
-                return numValidator.getNum();
+                return numValidator.getNum()==1 ? "SUPER_ADMIN" : "NOT_SELECTED";
             }
         }
     }
 
-    public static int choiceFirstRole() {
+    public static String choiceFirstRole() {
+
         System.out.println("Choice first role:");
         System.out.println("1.User");
         System.out.println("2.Customer");
@@ -65,12 +68,12 @@ public class CreateMenu {
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
-                return numValidator.getNum();
+                return (numValidator.getNum()==1 ? "USER" : "CUSTOMER");
             }
         }
     }
 
-    public static int choiceSecondRole() {
+    public static String choiceSecondRole() {
         System.out.println("Choice second role:");
         System.out.println("1.Admin");
         System.out.println("2.Provider");
@@ -82,13 +85,13 @@ public class CreateMenu {
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
-                return numValidator.getNum();
+                return numValidator.getNum()==1 ? "ADMIN" : "PROVIDER";
             }
         }
     }
 
-    public static ArrayList<TelephoneNumber> getTelephoneNumbers() {
-        ArrayList<TelephoneNumber> telephoneNumbers = new ArrayList<TelephoneNumber>();
+    public static List<String> getTelephoneNumbers() {
+       List<String> telephoneNumbers = new ArrayList<>();
         telephoneNumbers.add(getTelephoneNumber());//123
         if (isOneMoreNumber()) {
             telephoneNumbers.add(getTelephoneNumber());
@@ -117,7 +120,7 @@ public class CreateMenu {
         return choice.equals("1");
     }
 
-    public static TelephoneNumber getTelephoneNumber() {
+    private static String getTelephoneNumber() {
         while (true) {
             System.out.println("Enter telephone number:");
             Scanner in = new Scanner(System.in);
@@ -126,8 +129,22 @@ public class CreateMenu {
 
                 System.out.println("Error, please input valid phone number");
             } else {
-                return new TelephoneNumber(telNumber);
+                return telNumber;
             }
         }
     }
+    public static List<String> getRoles() {
+        String[] roles = new String[3];
+        roles[2] = choiceSuperRole();
+        if (roles[2] == RoleSuper.NOT_SELECTED.name()) {
+            roles[0] = choiceFirstRole();
+            roles[1] = choiceSecondRole();
+        }
+        else {
+            roles[0] = RoleFirstlevel.NOT_SELECTED.name();
+            roles[1] = RoleSecondLevel.NOT_SELECTED.name();
+        }
+        return Arrays.stream(roles).toList();
+    }
+
 }

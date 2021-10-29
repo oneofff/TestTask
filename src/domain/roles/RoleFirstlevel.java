@@ -1,5 +1,5 @@
 package domain.roles;
 
 public enum RoleFirstlevel {
-    User, Customer
+    USER, CUSTOMER, NOT_SELECTED
 }

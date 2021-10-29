@@ -1,12 +1,13 @@
 package domain;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ReferenseBook {
-    LinkedList<User> userList;
-    public ReferenseBook()
+    List<User> userList;
+    public ReferenseBook(LinkedList<User> userList)
     {
-        userList =new LinkedList<>();
+        this.userList = userList;
     }
     public void addUser(User user)
     {
@@ -17,7 +18,7 @@ public class ReferenseBook {
     public String toString() {
         StringBuffer usersInfo = new StringBuffer();
         for (User user: userList) {
-            usersInfo.append(user.toString());
+            usersInfo.append(user.toString()+"\n");
         }
         return usersInfo.toString();
     }
