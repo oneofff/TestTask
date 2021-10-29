@@ -38,7 +38,8 @@ public class CreateMenu {
             }
         }
     }
-    public static String choiceSuperRole() {
+
+    private static String choiceSuperRole() {
         System.out.println("Choice super role:");
         System.out.println("1.Super Admin");
         System.out.println("2.No super role");
@@ -50,12 +51,12 @@ public class CreateMenu {
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
-                return numValidator.getNum()==1 ? "SUPER_ADMIN" : "NOT_SELECTED";
+                return numValidator.getNum() == 1 ? "SUPER_ADMIN" : "NOT_SELECTED";
             }
         }
     }
 
-    public static String choiceFirstRole() {
+    private static String choiceFirstRole() {
 
         System.out.println("Choice first role:");
         System.out.println("1.User");
@@ -68,12 +69,12 @@ public class CreateMenu {
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
-                return (numValidator.getNum()==1 ? "USER" : "CUSTOMER");
+                return (numValidator.getNum() == 1 ? "USER" : "CUSTOMER");
             }
         }
     }
 
-    public static String choiceSecondRole() {
+    private static String choiceSecondRole() {
         System.out.println("Choice second role:");
         System.out.println("1.Admin");
         System.out.println("2.Provider");
@@ -85,13 +86,13 @@ public class CreateMenu {
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
-                return numValidator.getNum()==1 ? "ADMIN" : "PROVIDER";
+                return numValidator.getNum() == 1 ? "ADMIN" : "PROVIDER";
             }
         }
     }
 
     public static List<String> getTelephoneNumbers() {
-       List<String> telephoneNumbers = new ArrayList<>();
+        List<String> telephoneNumbers = new ArrayList<>();
         telephoneNumbers.add(getTelephoneNumber());//123
         if (isOneMoreNumber()) {
             telephoneNumbers.add(getTelephoneNumber());
@@ -133,14 +134,14 @@ public class CreateMenu {
             }
         }
     }
+
     public static List<String> getRoles() {
         String[] roles = new String[3];
         roles[2] = choiceSuperRole();
-        if (roles[2] == RoleSuper.NOT_SELECTED.name()) {
+        if (roles[2].equals(RoleSuper.NOT_SELECTED.name())) {
             roles[0] = choiceFirstRole();
             roles[1] = choiceSecondRole();
-        }
-        else {
+        } else {
             roles[0] = RoleFirstlevel.NOT_SELECTED.name();
             roles[1] = RoleSecondLevel.NOT_SELECTED.name();
         }

@@ -10,15 +10,13 @@ import ui.menu.StartMenu;
 import java.util.Scanner;
 
 public class Manager {
-    private ReferenseBook referenseBook;
+    private final ReferenseBook  referenseBook;
     private final FileWork fileWork;
-    private final UserService userServise;
+
 
     public Manager() throws UserReadError {
         this.fileWork = new FileWork();
         this.referenseBook = new ReferenseBook(fileWork.getUsersFromStorage());
-        userServise = new UserService();
-
     }
 
     public void start() {

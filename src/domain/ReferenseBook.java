@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ReferenseBook {
-    List<User> userList;
+    final List<User> userList;
     public ReferenseBook(LinkedList<User> userList)
     {
         this.userList = userList;
@@ -16,9 +16,9 @@ public class ReferenseBook {
 
     @Override
     public String toString() {
-        StringBuffer usersInfo = new StringBuffer();
+        StringBuilder usersInfo = new StringBuilder();
         for (User user: userList) {
-            usersInfo.append(user.toString()+"\n");
+            usersInfo.append(user.toString()).append("\n");
         }
         return usersInfo.toString();
     }

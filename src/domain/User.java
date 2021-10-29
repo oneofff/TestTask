@@ -18,22 +18,20 @@ public class User {
     private List<String> telephoneNumbers;
 
     public User() {
-        telephoneNumbers= new ArrayList<>();
+        telephoneNumbers = new ArrayList<>();
     }
 
     public User(String name, String surName, String email, RoleFirstlevel roleFirstlevel, RoleSecondLevel roleSecondLevel, RoleSuper roleSuper, ArrayList<String> telephoneNumbers) {
         this.name = name;
         this.surName = surName;
         this.email = email;
-        this.roleFirstlevel= roleFirstlevel;
+        this.roleFirstlevel = roleFirstlevel;
         this.roleSecondLevel = roleSecondLevel;
         this.roleSuper = roleSuper;
         this.telephoneNumbers = telephoneNumbers;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public String getSurName() {
         return surName;
@@ -41,26 +39,6 @@ public class User {
 
     public String getEmail() {
         return email;
-    }
-
-    public void setRoleFirstlevel(int choice) {
-        if (choice == 1) {
-            User.this.roleFirstlevel = RoleFirstlevel.USER;
-        } else {
-            User.this.roleFirstlevel = RoleFirstlevel.CUSTOMER;
-        }
-    }
-
-    public void setRoleSecondLevel(int choice) {
-        if (choice == 1) {
-            User.this.roleSecondLevel = RoleSecondLevel.ADMIN;
-        } else {
-            User.this.roleSecondLevel = RoleSecondLevel.PROVIDER;
-        }
-    }
-
-    public void setRoleSuper() {
-        this.roleSuper = RoleSuper.SUPER_ADMIN;
     }
 
     public RoleFirstlevel getRoleFirstlevel() {
@@ -87,15 +65,15 @@ public class User {
                 ", roleFirstlevel= '" + roleFirstlevel + '\'' +
                 ", roleSecondLevel= '" + roleSecondLevel + '\'' +
                 ", roleSuper= '" + roleSuper + '\'' +
-                ", telephoneNumbers= '" + tepeponeNumbersToString() + '\'';
+                ", telephoneNumbers= '" + telephoneNumbersToString() + '\'';
     }
-    private String tepeponeNumbersToString()
-    {
-        StringBuilder buffer= new StringBuilder();
+
+    private String telephoneNumbersToString() {
+        StringBuilder buffer = new StringBuilder();
         for (int i = 0; i < telephoneNumbers.size(); i++) {
             buffer.append(telephoneNumbers.get(i));
-            if (i==telephoneNumbers.size()-1)
-            continue;
+            if (i == telephoneNumbers.size() - 1)
+                continue;
             buffer.append(",");
         }
         return buffer.toString();
@@ -127,12 +105,9 @@ public class User {
         public User.Builder RoleFirstlevel(String roleFirstlevel) {
             if (RoleFirstlevel.USER.name().equals(roleFirstlevel)) {
                 User.this.roleFirstlevel = RoleFirstlevel.USER;
-            }
-            else if(RoleFirstlevel.CUSTOMER.name().equals(roleFirstlevel))
-            {
+            } else if (RoleFirstlevel.CUSTOMER.name().equals(roleFirstlevel)) {
                 User.this.roleFirstlevel = RoleFirstlevel.CUSTOMER;
-            }
-            else {
+            } else {
                 User.this.roleFirstlevel = RoleFirstlevel.NOT_SELECTED;
             }
             return this;
@@ -141,8 +116,7 @@ public class User {
         public User.Builder roleSecondLevel(String role) {
             if (RoleSecondLevel.ADMIN.name().equals(role)) {
                 User.this.roleSecondLevel = RoleSecondLevel.ADMIN;
-            }
-            else if (RoleSecondLevel.PROVIDER.name().equals(role)) {
+            } else if (RoleSecondLevel.PROVIDER.name().equals(role)) {
                 User.this.roleSecondLevel = RoleSecondLevel.PROVIDER;
             } else {
                 User.this.roleSecondLevel = RoleSecondLevel.NOT_SELECTED;
@@ -153,9 +127,8 @@ public class User {
         public User.Builder RoleSuper(String role) {
             if (RoleSuper.SUPER_ADMIN.name().equals(role)) {
                 User.this.roleSuper = RoleSuper.SUPER_ADMIN;
-            }
-            else {
-                User.this.roleSuper=RoleSuper.NOT_SELECTED;
+            } else {
+                User.this.roleSuper = RoleSuper.NOT_SELECTED;
             }
 
             return this;
@@ -172,4 +145,4 @@ public class User {
 
     }
 
-}
+}//TODO override equals hashcode and clone

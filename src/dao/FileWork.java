@@ -8,9 +8,7 @@ import service.UserService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -23,7 +21,7 @@ public  class FileWork implements CrudDao {
         try(FileReader read = new FileReader("usersData.txt"))
         {
             BufferedReader reader = new BufferedReader(read);
-            String line="";
+            String line;
             while (true) {
             line= reader.readLine();
             if (line==null)
@@ -45,13 +43,13 @@ public  class FileWork implements CrudDao {
 
     private List<String> getPhonesFromDataParse(String[] data)
     {
-        List<String> teleponeNums= new ArrayList<>();
+        List<String> telephoneNums= new ArrayList<>();
         Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(data[6]);
         while (matcher.find()) {
-            teleponeNums.add(data[6].substring(matcher.start(), matcher.end()));
+            telephoneNums.add(data[6].substring(matcher.start(), matcher.end()));
         }
-        return teleponeNums;
+        return telephoneNums;
     }
     private List<String> getRolesFromDataParse(String[] data)
     {
@@ -64,7 +62,7 @@ public  class FileWork implements CrudDao {
     }
     private String[] dataParse(String data)
     {
-        Pattern pattern = Pattern.compile("\'.+?\'");
+        Pattern pattern = Pattern.compile("'.+?'");
         Matcher matcher = pattern.matcher(data);
         String[] resulted= new String[7];
         for (int i = 0; i < 7; i++) {
@@ -77,7 +75,7 @@ public  class FileWork implements CrudDao {
     public void addUserToStorage(User user) throws UserSaveError {
         try(FileWriter writer = new FileWriter("usersData.txt", true))
         {
-            writer.append(user.toString()+"\n");
+            writer.append(user.toString()).append("\n");
             writer.flush();
         }
         catch(Exception exception){
