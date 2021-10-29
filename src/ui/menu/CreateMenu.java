@@ -93,7 +93,7 @@ public class CreateMenu {
 
     public static List<String> getTelephoneNumbers() {
         List<String> telephoneNumbers = new ArrayList<>();
-        telephoneNumbers.add(getTelephoneNumber());//123
+        telephoneNumbers.add(getTelephoneNumber());
         if (isOneMoreNumber()) {
             telephoneNumbers.add(getTelephoneNumber());
             if (isOneMoreNumber()) {

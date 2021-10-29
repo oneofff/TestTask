@@ -1,4 +1,3 @@
 name= 'Stas', surName= 'Karol', email= 'sad@gmail.com', roleFirstlevel= 'CUSTOMER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375336348180,375336348188'
-name= 'Vika', surName= 'Karol', email= 'asdqw@gmai.cl', roleFirstlevel= 'NOT_SELECTED', roleSecondLevel= 'NOT_SELECTED', roleSuper= 'SUPER_ADMIN', telephoneNumbers= '375336348188,375336399999,375336348180'
 name= 'LENA', surName= 'asd', email= 'asd@a.c', roleFirstlevel= 'CUSTOMER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375336348180'
-name= 'fds', surName= 'asd', email= 'asd@asd.co', roleFirstlevel= 'NOT_SELECTED', roleSecondLevel= 'NOT_SELECTED', roleSuper= 'SUPER_ADMIN', telephoneNumbers= '375333453434,375213211212,375233211223'
+name= 'Nata', surName= 'Karol', email= 'nata@gmail.com', roleFirstlevel= 'USER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375295387078,375336348180,375669998877'

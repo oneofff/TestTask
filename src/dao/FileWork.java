@@ -1,7 +1,6 @@
 package dao;
 
-import dao.exeption.UserReadError;
-import dao.exeption.UserSaveError;
+import dao.exeption.DaoException;
 import domain.User;
 import service.UserService;
 
@@ -16,7 +15,7 @@ import java.util.regex.Pattern;
 
 public  class FileWork implements CrudDao {
     @Override
-    public  LinkedList<User> getUsersFromStorage() throws UserReadError {
+    public  LinkedList<User> getUsersFromStorage() throws DaoException {
         LinkedList<User> usersListFormFile = new LinkedList<>();
         try(FileReader read = new FileReader("usersData.txt"))
         {
@@ -31,12 +30,20 @@ public  class FileWork implements CrudDao {
             String[] data = dataParse(line);
             List<String> phoneNumbs = getPhonesFromDataParse(data);
             List<String> roles = getRolesFromDataParse(data);
-            User user = UserService.createUser(data[0],data[1],data[2],phoneNumbs,roles);
+            User user = User.newBuilder()
+                        .name(data[0])
+                        .surName(data[1])
+                        .email(data[2])
+                        .telephoneNumbers(phoneNumbs)
+                        .RoleFirstlevel(roles.get(0))
+                        .roleSecondLevel(roles.get(1))
+                        .RoleSuper(roles.get(2))
+                        .build();
             usersListFormFile.add(user);
             }
         }
         catch(Exception exception){
-            throw new UserReadError();
+            throw new DaoException("Error read user from file");
         }
         return usersListFormFile;
     }
@@ -72,14 +79,27 @@ public  class FileWork implements CrudDao {
         return resulted;
     }
     @Override
-    public void addUserToStorage(User user) throws UserSaveError {
+    public void addUserToStorage(User user) throws DaoException {
         try(FileWriter writer = new FileWriter("usersData.txt", true))
         {
             writer.append(user.toString()).append("\n");
             writer.flush();
         }
         catch(Exception exception){
-            throw new UserSaveError();
+            throw new DaoException("Error save user to file");
+        }
+    }
+    public void addUsersListToStorage(List<User> users) throws DaoException {
+        try(FileWriter writer = new FileWriter("usersData.txt", false))
+        {
+            for (User user:
+                 users) {
+                writer.append(user.toString()).append("\n");
+                writer.flush();
+            }
+        }
+        catch(Exception exception){
+            throw new DaoException("Error save user list to file");
         }
     }
 }

@@ -17,10 +17,25 @@ public class ReferenseBook {
     @Override
     public String toString() {
         StringBuilder usersInfo = new StringBuilder();
+        int i=1;
         for (User user: userList) {
-            usersInfo.append(user.toString()).append("\n");
+            usersInfo.append(i).append(". ").append(user.toString()).append("\n");
+            i++;
         }
         return usersInfo.toString();
+    }
+    public int getLenght()
+    {
+        return userList.size();
+    }
+    public String deleteById(int id){
+        String data=userList.get(id).toString();
+        userList.remove(id);
+        return data;
+    }
+
+    public List<User> getUserList() {
+        return userList;
     }
 }
 
