@@ -11,13 +11,14 @@ import java.util.Scanner;
 
 public class Manager {
     private ReferenseBook referenseBook;
-    private FileWork fileWork;
+    private final FileWork fileWork;
     private final UserService userServise;
 
     public Manager() throws UserReadError {
-        FileWork fileWork= new FileWork();
+        this.fileWork = new FileWork();
         this.referenseBook = new ReferenseBook(fileWork.getUsersFromStorage());
         userServise = new UserService();
+
     }
 
     public void start() {
@@ -52,7 +53,7 @@ public class Manager {
 
                     }
                     case (5): {
-                        System.out.println("\t\t\t\tAll Users:");
+                        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
                         System.out.println(referenseBook);
                         System.out.println("Press Enter to continue");
                         Scanner a = new Scanner(System.in);
