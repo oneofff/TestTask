@@ -2,7 +2,6 @@ package dao;
 
 import dao.exeption.DaoException;
 import domain.User;
-import service.UserService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -35,7 +34,7 @@ public  class UserFile implements CrudDao {
                         .surName(data[1])
                         .email(data[2])
                         .telephoneNumbers(phoneNumbs)
-                        .RoleFirstlevel(roles.get(0))
+                        .RoleFirstLevel(roles.get(0))
                         .roleSecondLevel(roles.get(1))
                         .RoleSuper(roles.get(2))
                         .build();

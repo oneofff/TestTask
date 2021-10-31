@@ -1,6 +1,6 @@
 package ui.menu;
 
-import domain.roles.RoleFirstlevel;
+import domain.roles.RoleFirstLevel;
 import domain.roles.RoleSecondLevel;
 import domain.roles.RoleSuper;
 import ui.validation.EmailValidator;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class CreateMenu {
+public class UserCreateMenu {
 
     public static String getName() {
         System.out.println("Enter name:");
@@ -91,6 +91,19 @@ public class CreateMenu {
         }
     }
 
+    public static List<String> getRoles() {
+        String[] roles = new String[3];
+        roles[2] = choiceSuperRole();
+        if (roles[2].equals(RoleSuper.NOT_SELECTED.name())) {
+            roles[0] = choiceFirstRole();
+            roles[1] = choiceSecondRole();
+        } else {
+            roles[0] = RoleFirstLevel.NOT_SELECTED.name();
+            roles[1] = RoleSecondLevel.NOT_SELECTED.name();
+        }
+        return Arrays.stream(roles).toList();
+    }
+
     public static List<String> getTelephoneNumbers() {
         List<String> telephoneNumbers = new ArrayList<>();
         telephoneNumbers.add(getTelephoneNumber());
@@ -121,7 +134,7 @@ public class CreateMenu {
         return choice.equals("1");
     }
 
-    private static String getTelephoneNumber() {
+    public static String getTelephoneNumber() {
         while (true) {
             System.out.println("Enter telephone number:");
             Scanner in = new Scanner(System.in);
@@ -133,19 +146,6 @@ public class CreateMenu {
                 return telNumber;
             }
         }
-    }
-
-    public static List<String> getRoles() {
-        String[] roles = new String[3];
-        roles[2] = choiceSuperRole();
-        if (roles[2].equals(RoleSuper.NOT_SELECTED.name())) {
-            roles[0] = choiceFirstRole();
-            roles[1] = choiceSecondRole();
-        } else {
-            roles[0] = RoleFirstlevel.NOT_SELECTED.name();
-            roles[1] = RoleSecondLevel.NOT_SELECTED.name();
-        }
-        return Arrays.stream(roles).toList();
     }
 
 }
