@@ -6,6 +6,7 @@ import domain.roles.RoleSuper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class User implements Cloneable{
 
@@ -116,6 +117,25 @@ public class User implements Cloneable{
         User newUser = (User) super.clone();
         newUser.telephoneNumbers = new ArrayList<>(telephoneNumbers);
         return newUser;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        if (!Objects.equals(name, user.name)) return false;
+        if (!Objects.equals(surName, user.surName)) return false;
+        if (!Objects.equals(email, user.email)) return false;
+        if (roleFirstLevel != user.roleFirstLevel) return false;
+        if (roleSecondLevel != user.roleSecondLevel) return false;
+        if (roleSuper != user.roleSuper) return false;
+        return Objects.equals(telephoneNumbers, user.telephoneNumbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surName, email, roleFirstLevel, roleSecondLevel, roleSuper, telephoneNumbers);
     }
 
     public static User.Builder newBuilder() {
