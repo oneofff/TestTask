@@ -8,11 +8,11 @@ import ui.validation.NumValidator;
 
 import java.util.Scanner;
 
-public class Manager {
+public class UiService {
     private final UserService userService;
     private final Scanner in = new Scanner(System.in);
 
-    public Manager() throws DaoException {
+    public UiService() throws DaoException {
         this.userService = new UserService();
     }
 
@@ -54,26 +54,23 @@ public class Manager {
         if (number == 0) {
             return;
         }
-        int id=number-1;
+        int id = number - 1;
         System.out.println("Chosen User:");
         System.out.println(userService.getUserInfoById(id));
-        UserService.Transaction editUserTransaction =  userService.newTransaction();
+        UserService.Transaction editUserTransaction = userService.newTransaction();
         editUserTransaction.start(id);
         System.out.println("Edit name? (1/0):");
         if (isAgree()) {
             editUserTransaction.editName(UserCreateMenu.getName());
         }
-
         System.out.println("Edit surname? (1/0):");
         if (isAgree()) {
             editUserTransaction.editSurname(UserCreateMenu.getSurName());
         }
-
         System.out.println("Edit email? (1/0):");
         if (isAgree()) {
             editUserTransaction.editEmail(UserCreateMenu.getEmail());
         }
-
         System.out.println("Edit telephone Numbers? (1/0):");
         if (isAgree()) {
             int countOfTelNumbers = userService.getCountTelephoneNumbersOfUser(id);
@@ -93,7 +90,6 @@ public class Manager {
                 }
             }
         }
-
         System.out.println("Edit roles ? (1/0)");
         if (isAgree()) {
             editUserTransaction.editRoles(UserCreateMenu.getRoles());
@@ -103,18 +99,15 @@ public class Manager {
         System.out.println("New state:");
         System.out.println(editUserTransaction.getNewStateInfo());
         System.out.println("Save changes ? (1/0)");
-        if (isAgree())
-        {
+        if (isAgree()) {
             editUserTransaction.commit();
             System.out.println("User successful edited");
-        }
-        else
-        {
+        } else {
             System.out.println("Editing has been canceled");
         }
         System.out.println("Press Enter to continue");
         in.nextLine();
-}
+    }
 
     private void deleteUser() throws ServiceException {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
@@ -124,7 +117,7 @@ public class Manager {
         if (number == 0) {
             return;
         }
-        int id=number-1;
+        int id = number - 1;
         System.out.println(userService.deleteUserById(id));
         System.out.println("User successful deleted");
         System.out.println("Press Enter to continue");
@@ -139,7 +132,7 @@ public class Manager {
         if (number == 0) {
             return;
         }
-        int id=number-1;
+        int id = number - 1;
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tInfo about selected User:");
         System.out.println(userService.getUserInfoById(id));
         System.out.println("Press Enter to continue");

@@ -1,13 +1,11 @@
-package ui;
-
 import dao.exeption.DaoException;
-import service.Manager;
+import service.UiService;
 
 
 public class Start {
 
     public static void main(String[] args) throws DaoException {
-       Manager manager=new Manager();
-       manager.start();
+       UiService uiService =new UiService();
+       uiService.start();
     }
 }
