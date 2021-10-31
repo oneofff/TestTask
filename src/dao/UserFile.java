@@ -75,7 +75,6 @@ public class UserFile implements CrudDao {
 
     private String[] dataParse(String data) throws DaoException {
         try {
-
             Pattern pattern = Pattern.compile("'.+?'");
             Matcher matcher = pattern.matcher(data);
             String[] resulted = new String[7];
@@ -87,7 +86,6 @@ public class UserFile implements CrudDao {
         } catch (Exception exception) {
             throw new DaoException("Error parse data");
         }
-
     }
 
     @Override
