@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ReferenceBook {
-    final List<User> userList;
+    private List<User> userList;
     public ReferenceBook(LinkedList<User> userList)
     {
         this.userList = userList;
