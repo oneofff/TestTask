@@ -27,13 +27,15 @@ public class Manager {
                     }
                     case (2): {
 
+                        break;
                     }
                     case (3): {
                         deleteUser();
                         break;
                     }
                     case (4): {
-
+                        showUser();
+                        break;
                     }
                     case (5): {
                         showAllUsers();
@@ -41,6 +43,7 @@ public class Manager {
                     }
                     case (0): {
                         System.exit(0);
+                        break;
                     }
                 }
             }
@@ -58,19 +61,19 @@ public class Manager {
                 CreateMenu.getRoles()
         );
         userService.addUser(newUser);
-        System.out.println("Press Enter to continue");
+        System.out.println("\nPress Enter to continue");
         in.nextLine();
     }
-
+ 
     private void deleteUser() throws DaoException {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
-        System.out.println(userService.getReferenseBook());
+        System.out.println(userService.getReferenseBookInfo());
         System.out.println("Enter User Number to delete or 0 to cancel:");
         String id;
         NumValidator numValidator;
         while (true) {
             id = in.next();
-            numValidator = new NumValidator(id, 0, userService.getReferenseBook().getLenght());
+            numValidator = new NumValidator(id, 0, userService.getLengthOfReferenseBook());
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
@@ -83,12 +86,40 @@ public class Manager {
         }
         System.out.println(userService.deleteUserById(numValidator.getNum() - 1));
         System.out.println("User successful deleted");
+        System.out.println("\nPress Enter to continue");
+        in.nextLine();
+    }
+
+    private void showUser()
+    {
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
+        System.out.println(userService.getUsersNames());
+        System.out.println("Enter User number to show info or 0 to cancel:");
+        String id;
+        NumValidator numValidator;
+        while (true) {
+            id = in.next();
+            numValidator = new NumValidator(id, 0, userService.getLengthOfReferenseBook());
+            if (!numValidator.checkValidNum()) {
+                System.out.println("Error, please input valid number");
+            } else {
+                break;
+            }
+        }
+        in.nextLine();
+        if (numValidator.getNum() == 0) {
+            return;
+        }
+        System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tInfo about selected User:");
+        System.out.println(userService.getUserInfoById(numValidator.getNum() - 1));
+        System.out.println("\nPress Enter to continue");
+        in.nextLine();
     }
 
     private void showAllUsers() {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
-        System.out.println(userService.getReferenseBook());
-        System.out.println("Press Enter to continue");
+        System.out.println(userService.getReferenseBookInfo());
+        System.out.println("\nPress Enter to continue");
         in.nextLine();
     }
 }

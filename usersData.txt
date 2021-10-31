@@ -1,3 +1,2 @@
 name= 'Stas', surName= 'Karol', email= 'sad@gmail.com', roleFirstlevel= 'CUSTOMER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375336348180,375336348188'
-name= 'LENA', surName= 'asd', email= 'asd@a.c', roleFirstlevel= 'CUSTOMER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375336348180'
 name= 'Nata', surName= 'Karol', email= 'nata@gmail.com', roleFirstlevel= 'USER', roleSecondLevel= 'ADMIN', roleSuper= 'NOT_SELECTED', telephoneNumbers= '375295387078,375336348180,375669998877'

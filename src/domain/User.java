@@ -57,6 +57,34 @@ public class User {
         return telephoneNumbers;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRoleFirstlevel(RoleFirstlevel roleFirstlevel) {
+        this.roleFirstlevel = roleFirstlevel;
+    }
+
+    public void setRoleSecondLevel(RoleSecondLevel roleSecondLevel) {
+        this.roleSecondLevel = roleSecondLevel;
+    }
+
+    public void setRoleSuper(RoleSuper roleSuper) {
+        this.roleSuper = roleSuper;
+    }
+
+    public void setTelephoneNumbers(List<String> telephoneNumbers) {
+        this.telephoneNumbers = telephoneNumbers;
+    }
+
     @Override
     public String toString() {
         return "name= '" + name + '\'' +

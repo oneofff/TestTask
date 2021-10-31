@@ -16,10 +16,6 @@ public class UserService {
         this.referenseBook = new ReferenseBook(userFile.getUsersFromStorage());
     }
 
-    public ReferenseBook getReferenseBook() {
-        return referenseBook;
-    }
-
     public  User createUser(String name, String surName, String email, List<String> telephones, List<String> roles)
     {
         return User.newBuilder()
@@ -38,12 +34,24 @@ public class UserService {
         userFile.addUserToStorage(newUser);
         System.out.println("User added successfully!");
     }
-     public String deleteUserById(int id) throws DaoException {
+    public String deleteUserById(int id) throws DaoException {
         String deleteUserInfo;
         deleteUserInfo=referenseBook.deleteById(id);
         userFile.addUsersListToStorage(referenseBook.getUserList());
         return deleteUserInfo;
      }
-
-
+    public String getUserInfoById(int id){
+        return referenseBook.getUserById(id).toString();
+    }
+    public int getLengthOfReferenseBook()
+    {
+        return referenseBook.getLenght();
+    }
+    public String getUsersNames(){
+        return referenseBook.UsersNamesToString();
+    }
+    public String getReferenseBookInfo()
+    {
+        return referenseBook.toString();
+    }
 }

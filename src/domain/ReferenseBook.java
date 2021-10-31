@@ -34,8 +34,23 @@ public class ReferenseBook {
         return data;
     }
 
+    public User getUserById(int id)
+    {
+        return userList.get(id);
+    }
+
     public List<User> getUserList() {
         return userList;
+    }
+
+    public String UsersNamesToString() {
+        StringBuilder usersName = new StringBuilder();
+        int i=1;
+        for (User user: userList) {
+            usersName.append(i).append(". ").append(user.getName()).append("\n");
+            i++;
+        }
+        return usersName.toString();
     }
 }
 
