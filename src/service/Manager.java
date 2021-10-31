@@ -1,6 +1,7 @@
 package service;
 
 import dao.exeption.DaoException;
+import service.exeption.ServiceException;
 import ui.menu.UserCreateMenu;
 import ui.menu.StartMenu;
 import ui.validation.NumValidator;
@@ -8,8 +9,8 @@ import ui.validation.NumValidator;
 import java.util.Scanner;
 
 public class Manager {
-    UserService userService;
-    Scanner in = new Scanner(System.in);
+    private final UserService userService;
+    private final Scanner in = new Scanner(System.in);
 
     public Manager() throws DaoException {
         this.userService = new UserService();
@@ -20,24 +21,12 @@ public class Manager {
             while (true) {
                 StartMenu.show();
                 switch (StartMenu.getChoice()) {
-                    case (1) -> {
-                        createUser();
-                    }
-                    case (2) -> {
-                        editUser();
-                    }
-                    case (3) -> {
-                        deleteUser();
-                    }
-                    case (4) -> {
-                        showUser();
-                    }
-                    case (5) -> {
-                        showAllUsers();
-                    }
-                    case (0) -> {
-                        System.exit(0);
-                    }
+                    case (1) -> createUser();
+                    case (2) -> editUser();
+                    case (3) -> deleteUser();
+                    case (4) -> showUser();
+                    case (5) -> showAllUsers();
+                    case (0) -> System.exit(0);
                 }
             }
         } catch (Exception exception) {
@@ -57,7 +46,7 @@ public class Manager {
         in.nextLine();
     }
 
-    private void editUser() throws CloneNotSupportedException, DaoException {
+    private void editUser() throws CloneNotSupportedException, DaoException, ServiceException {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
         System.out.println(userService.getReferenceBookInfo());
         System.out.println("Enter User Number to edit or 0 to cancel:");
@@ -127,7 +116,7 @@ public class Manager {
         in.nextLine();
 }
 
-    private void deleteUser() throws DaoException {
+    private void deleteUser() throws ServiceException {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
         System.out.println(userService.getReferenceBookInfo());
         System.out.println("Enter User Number to delete or 0 to cancel:");
@@ -142,7 +131,7 @@ public class Manager {
         in.nextLine();
     }
 
-    private void showUser() {
+    private void showUser() throws ServiceException {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
         System.out.println(userService.getUsersNames());
         System.out.println("Enter User number to show info or 0 to cancel:");
@@ -170,7 +159,7 @@ public class Manager {
         while (true) {
             id = in.next();
             in.nextLine();
-            numValidator = new NumValidator(id, 0, userService.getLengthOfReferenseBook());
+            numValidator = new NumValidator(id, 0, userService.getLengthOfReferenceBook());
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {

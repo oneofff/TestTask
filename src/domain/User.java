@@ -12,9 +12,9 @@ public class User implements Cloneable{
     private String name;
     private String surName;
     private String email;
-    private RoleFirstLevel roleFirstLevel;
-    private RoleSecondLevel roleSecondLevel;
-    private RoleSuper roleSuper;
+    private RoleFirstLevel roleFirstLevel = RoleFirstLevel.NOT_SELECTED;
+    private RoleSecondLevel roleSecondLevel= RoleSecondLevel.NOT_SELECTED;
+    private RoleSuper roleSuper =RoleSuper.NOT_SELECTED;
     private List<String> telephoneNumbers;
 
     public User() {
@@ -39,18 +39,6 @@ public class User implements Cloneable{
 
     public String getEmail() {
         return email;
-    }
-
-    public RoleFirstLevel getRoleFirstLevel() {
-        return roleFirstLevel;
-    }
-
-    public RoleSecondLevel getRoleSecondLevel() {
-        return roleSecondLevel;
-    }
-
-    public RoleSuper getRoleThirdLevel() {
-        return roleSuper;
     }
 
     public List<String> getTelephoneNumbers() {
@@ -106,7 +94,7 @@ public class User implements Cloneable{
         return "name= '" + name + '\'' +
                 ", surName= '" + surName + '\'' +
                 ", email= '" + email + '\'' +
-                ", roleFirstlevel= '" + roleFirstLevel + '\'' +
+                ", roleFirstLevel= '" + roleFirstLevel + '\'' +
                 ", roleSecondLevel= '" + roleSecondLevel + '\'' +
                 ", roleSuper= '" + roleSuper + '\'' +
                 ", telephoneNumbers= '" + telephoneNumbersToString() + '\'';

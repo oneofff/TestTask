@@ -2,14 +2,15 @@ package service;
 
 import dao.UserFile;
 import dao.exeption.DaoException;
-import domain.ReferenseBook;
+import domain.ReferenceBook;
 import domain.User;
+import service.exeption.ServiceException;
 
 import java.util.List;
 
 
 public class UserService {
-    private final ReferenseBook referenseBook;
+    private final ReferenceBook referenceBook;
     private final UserFile userFile;
 
     public class Transaction {
@@ -17,7 +18,7 @@ public class UserService {
         private int id;
         public void start(int id) throws CloneNotSupportedException {
             this.id = id;
-            newState = (User) referenseBook.getUserById(id).clone();
+            newState = (User) referenceBook.getUserById(id).clone();
         }
 
         public void editName(String name) {
@@ -51,15 +52,15 @@ public class UserService {
         }
 
         public void commit() throws DaoException {
-            referenseBook.getUserList().set(id,newState);
-            userFile.addUsersListToStorage(referenseBook.getUserList());
+            referenceBook.getUserList().set(id,newState);
+            userFile.addUsersListToStorage(referenceBook.getUserList());
         }
 
     }
 
     public UserService() throws DaoException {
         this.userFile = new UserFile();
-        this.referenseBook = new ReferenseBook(userFile.getUsersFromStorage());
+        this.referenceBook = new ReferenceBook(userFile.getUsersFromStorage());
     }
 
     public User createUser(String name, String surName, String email, List<String> telephones, List<String> roles) {
@@ -75,41 +76,52 @@ public class UserService {
     }
 
     public void addUser(User newUser) throws DaoException {
-        referenseBook.addUser(newUser);
+        referenceBook.addUser(newUser);
         System.out.println("Created new user\n" + newUser.toString());
         userFile.addUserToStorage(newUser);
         System.out.println("User added successfully!");
     }
 
-    public String deleteUserById(int id) throws DaoException {
-        String deleteUserInfo;
-        deleteUserInfo = referenseBook.deleteById(id);
-        userFile.addUsersListToStorage(referenseBook.getUserList());
-        return deleteUserInfo;
+    public String deleteUserById(int id) throws ServiceException {
+        try {
+            String deleteUserInfo;
+            deleteUserInfo = referenceBook.deleteById(id);
+            userFile.addUsersListToStorage(referenceBook.getUserList());
+            return deleteUserInfo;
+        }
+        catch (Exception exception)
+        {
+            throw new ServiceException("Error delete user by id");
+        }
     }
 
-    public String getUserInfoById(int id) {
-        return referenseBook.getUserById(id).toString();
+    public String getUserInfoById(int id) throws ServiceException {
+        try{
+            return referenceBook.getUserById(id).toString();
+        }
+        catch (Exception exception)
+        {
+            throw new ServiceException("Error get user by id");
+        }
     }
 
-    public int getLengthOfReferenseBook() {
-        return referenseBook.getLenght();
+    public int getLengthOfReferenceBook() {
+        return referenceBook.getLength();
     }
 
     public String getUsersNames() {
-        return referenseBook.UsersNamesToString();
+        return referenceBook.UsersNamesToString();
     }
 
     public String getReferenceBookInfo() {
-        return referenseBook.toString();
+        return referenceBook.toString();
     }
 
     public int getCountTelephoneNumbersOfUser(int id) {
-        return referenseBook.getUserById(id).getTelephoneNumbers().size();
+        return referenceBook.getUserById(id).getTelephoneNumbers().size();
     }
 
     public Transaction newTransaction() {
-        Transaction transaction = new Transaction();
-        return transaction;
+        return new Transaction();
     }
 }

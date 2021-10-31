@@ -3,9 +3,9 @@ package domain;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ReferenseBook {
+public class ReferenceBook {
     final List<User> userList;
-    public ReferenseBook(LinkedList<User> userList)
+    public ReferenceBook(LinkedList<User> userList)
     {
         this.userList = userList;
     }
@@ -24,7 +24,7 @@ public class ReferenseBook {
         }
         return usersInfo.toString();
     }
-    public int getLenght()
+    public int getLength()
     {
         return userList.size();
     }

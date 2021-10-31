@@ -29,7 +29,9 @@ public class NumValidator {
         if (!isNum()) {
             return false;
         }
-        return isInRange();
+        else {
+            return isInRange();
+        }
     }
 
     public int getNum() {

@@ -4,8 +4,8 @@ import domain.roles.RoleFirstLevel;
 import domain.roles.RoleSecondLevel;
 import domain.roles.RoleSuper;
 import ui.validation.EmailValidator;
-import ui.validation.NumValidator;
 import ui.validation.TelephoneNumberValidator;
+import ui.validation.NumValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
