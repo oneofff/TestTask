@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Manager {
     UserService userService;
     Scanner in = new Scanner(System.in);
+
     public Manager() throws DaoException {
         this.userService = new UserService();
     }
@@ -47,6 +48,7 @@ public class Manager {
             System.out.println(exception.getMessage());
         }
     }
+
     private void createUser() throws DaoException {
         User newUser = userService.createUser(
                 CreateMenu.getName(),
@@ -59,6 +61,7 @@ public class Manager {
         System.out.println("Press Enter to continue");
         in.nextLine();
     }
+
     private void deleteUser() throws DaoException {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
         System.out.println(userService.getReferenseBook());
@@ -67,7 +70,7 @@ public class Manager {
         NumValidator numValidator;
         while (true) {
             id = in.next();
-            numValidator= new NumValidator(id, 0, userService.getReferenseBook().getLenght());
+            numValidator = new NumValidator(id, 0, userService.getReferenseBook().getLenght());
             if (!numValidator.checkValidNum()) {
                 System.out.println("Error, please input valid number");
             } else {
@@ -75,15 +78,14 @@ public class Manager {
             }
         }
         in.nextLine();
-        if(numValidator.getNum()==0)
-        {
+        if (numValidator.getNum() == 0) {
             return;
         }
-        System.out.println(userService.deleteUserById(numValidator.getNum()-1));
+        System.out.println(userService.deleteUserById(numValidator.getNum() - 1));
         System.out.println("User successful deleted");
     }
-    private void showAllUsers()
-    {
+
+    private void showAllUsers() {
         System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tAll Users:");
         System.out.println(userService.getReferenseBook());
         System.out.println("Press Enter to continue");

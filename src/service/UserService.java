@@ -1,6 +1,6 @@
 package service;
 
-import dao.FileWork;
+import dao.UserFile;
 import dao.exeption.DaoException;
 import domain.ReferenseBook;
 import domain.User;
@@ -10,10 +10,10 @@ import java.util.List;
 
 public class UserService {
     private final ReferenseBook referenseBook;
-    private final FileWork fileWork;
+    private final UserFile userFile;
     public UserService() throws DaoException {
-        this.fileWork = new FileWork();
-        this.referenseBook = new ReferenseBook(fileWork.getUsersFromStorage());
+        this.userFile = new UserFile();
+        this.referenseBook = new ReferenseBook(userFile.getUsersFromStorage());
     }
 
     public ReferenseBook getReferenseBook() {
@@ -35,13 +35,13 @@ public class UserService {
     public void addUser(User newUser) throws DaoException {
         referenseBook.addUser(newUser);
         System.out.println("Created new user\n" + newUser.toString());
-        fileWork.addUserToStorage(newUser);
+        userFile.addUserToStorage(newUser);
         System.out.println("User added successfully!");
     }
      public String deleteUserById(int id) throws DaoException {
         String deleteUserInfo;
         deleteUserInfo=referenseBook.deleteById(id);
-        fileWork.addUsersListToStorage(referenseBook.getUserList());
+        userFile.addUsersListToStorage(referenseBook.getUserList());
         return deleteUserInfo;
      }
 

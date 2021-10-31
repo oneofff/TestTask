@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public  class FileWork implements CrudDao {
+public  class UserFile implements CrudDao {
     @Override
     public  LinkedList<User> getUsersFromStorage() throws DaoException {
         LinkedList<User> usersListFormFile = new LinkedList<>();
@@ -48,35 +48,53 @@ public  class FileWork implements CrudDao {
         return usersListFormFile;
     }
 
-    private List<String> getPhonesFromDataParse(String[] data)
-    {
-        List<String> telephoneNums= new ArrayList<>();
-        Pattern pattern = Pattern.compile("[0-9]+");
-        Matcher matcher = pattern.matcher(data[6]);
-        while (matcher.find()) {
-            telephoneNums.add(data[6].substring(matcher.start(), matcher.end()));
-        }
-        return telephoneNums;
-    }
-    private List<String> getRolesFromDataParse(String[] data)
-    {
-        List<String> roles= new ArrayList<>();
-        roles.add(data[3]);
-        roles.add(data[4]);
-        roles.add(data[5]);
+    private List<String> getPhonesFromDataParse(String[] data) throws DaoException {
+        try {
 
-        return roles;
-    }
-    private String[] dataParse(String data)
-    {
-        Pattern pattern = Pattern.compile("'.+?'");
-        Matcher matcher = pattern.matcher(data);
-        String[] resulted= new String[7];
-        for (int i = 0; i < 7; i++) {
-            matcher.find();
-            resulted[i]=  data.substring(matcher.start()+1, matcher.end()-1);
+
+            List<String> telephoneNums = new ArrayList<>();
+            Pattern pattern = Pattern.compile("[0-9]+");
+            Matcher matcher = pattern.matcher(data[6]);
+            while (matcher.find()) {
+                telephoneNums.add(data[6].substring(matcher.start(), matcher.end()));
+            }
+            return telephoneNums;
         }
-        return resulted;
+        catch (Exception exception)
+        {
+            throw new DaoException("Error get phones from data");
+        }
+    }
+    private List<String> getRolesFromDataParse(String[] data) throws DaoException {
+        try {
+            List<String> roles = new ArrayList<>();
+            roles.add(data[3]);
+            roles.add(data[4]);
+            roles.add(data[5]);
+            return roles;
+        }
+        catch (Exception exception){
+            throw new DaoException("Error get roles from data ");
+        }
+
+    }
+    private String[] dataParse(String data) throws DaoException {
+        try {
+
+            Pattern pattern = Pattern.compile("'.+?'");
+            Matcher matcher = pattern.matcher(data);
+            String[] resulted = new String[7];
+            for (int i = 0; i < 7; i++) {
+                matcher.find();
+                resulted[i] = data.substring(matcher.start() + 1, matcher.end() - 1);
+            }
+            return resulted;
+        }
+        catch (Exception exception)
+        {
+            throw new DaoException("Error parse data");
+        }
+
     }
     @Override
     public void addUserToStorage(User user) throws DaoException {
