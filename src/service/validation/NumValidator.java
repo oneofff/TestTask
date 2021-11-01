@@ -1,4 +1,4 @@
-package ui.validation;
+package service.validation;
 
 public class NumValidator {
     private final String checkString;

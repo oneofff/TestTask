@@ -4,7 +4,7 @@ import dao.exeption.DaoException;
 import service.exeption.ServiceException;
 import ui.menu.UserCreateMenu;
 import ui.menu.StartMenu;
-import ui.validation.NumValidator;
+import service.validation.NumValidator;
 
 import java.util.Scanner;
 

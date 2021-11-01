@@ -1,6 +1,6 @@
 package ui.menu;
 
-import ui.validation.NumValidator;
+import service.validation.NumValidator;
 
 import java.util.Scanner;
 

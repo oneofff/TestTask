@@ -3,9 +3,9 @@ package ui.menu;
 import domain.roles.RoleFirstLevel;
 import domain.roles.RoleSecondLevel;
 import domain.roles.RoleSuper;
-import ui.validation.EmailValidator;
-import ui.validation.TelephoneNumberValidator;
-import ui.validation.NumValidator;
+import service.validation.EmailValidator;
+import service.validation.TelephoneNumberValidator;
+import service.validation.NumValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
