@@ -1,5 +1,6 @@
 package service;
 
+import dao.UserFile;
 import dao.exeption.DaoException;
 import service.exeption.ServiceException;
 import ui.menu.UserCreateMenu;
@@ -13,7 +14,7 @@ public class UiService {
     private final Scanner in = new Scanner(System.in);
 
     public UiService() throws DaoException {
-        this.userService = new UserService();
+        this.userService = new UserService(new UserFile());
     }
 
     public void start() {

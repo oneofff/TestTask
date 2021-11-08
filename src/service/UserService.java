@@ -1,5 +1,6 @@
 package service;
 
+import dao.CrudDao;
 import dao.UserFile;
 import dao.exeption.DaoException;
 import domain.ReferenceBook;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class UserService {
     private final ReferenceBook referenceBook;
-    private final UserFile userFile;
+    private final CrudDao daoImpl;
 
     public class Transaction {
         private User newState;
@@ -53,14 +54,14 @@ public class UserService {
 
         public void commit() throws DaoException {
             referenceBook.getUserList().set(id,newState);
-            userFile.addUsersListToStorage(referenceBook.getUserList());
+            daoImpl.addUsersListToStorage(referenceBook.getUserList());
         }
 
     }
 
-    public UserService() throws DaoException {
-        this.userFile = new UserFile();
-        this.referenceBook = new ReferenceBook(userFile.getUsersFromStorage());
+    public UserService(CrudDao daoImpl) throws DaoException {
+        this.daoImpl = daoImpl;
+        this.referenceBook = new ReferenceBook(daoImpl.getUsersFromStorage());
     }
 
     public User createUser(String name, String surName, String email, List<String> telephones, List<String> roles) {
@@ -78,7 +79,7 @@ public class UserService {
     public void addUser(User newUser) throws DaoException {
         referenceBook.addUser(newUser);
         System.out.println("Created new user\n" + newUser.toString());
-        userFile.addUserToStorage(newUser);
+        daoImpl.addUserToStorage(newUser);
         System.out.println("User added successfully!");
     }
 
@@ -86,7 +87,7 @@ public class UserService {
         try {
             String deleteUserInfo;
             deleteUserInfo = referenceBook.deleteById(id);
-            userFile.addUsersListToStorage(referenceBook.getUserList());
+            daoImpl.addUsersListToStorage(referenceBook.getUserList());
             return deleteUserInfo;
         }
         catch (Exception exception)
